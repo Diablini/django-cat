@@ -1,0 +1,8 @@
+dbpass.txt
+# mysql password
+
+secretkey.txt
+# django secret key
+
+*.pyc
+# python bytecodes
