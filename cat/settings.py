@@ -18,8 +18,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 
-with open('secretkey.txt') as f:
-    SECRET_KEY = f.read().strip()
+with open('secretkey.txt') as s:
+    SECRET_KEY = s.read().strip()
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -59,8 +59,8 @@ WSGI_APPLICATION = 'cat.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
 
-with open('dbpass.txt') as f:
-    DB_PASS = f.read().strip()
+with open('dbpass.txt') as p:
+    DB_PASS = p.read().strip()
 
 DATABASES = {
     'default': {

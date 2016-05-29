@@ -28,12 +28,8 @@ class myUser(models.Model):
 
 	def __str__(self):
 		return self.userid.username + ' profile'
-		
-	
-	def clean(self):
-		# FIXME: validate properly
-		if not match( r'088\d\d\d\d\d\d\d', self.phonenumber,flags=0):
-			raise ValidationError('Невалиден телефонен номер')
+
+#FIXME: validation		
 
 # FORMS
 
@@ -76,7 +72,12 @@ class profileForm(ModelForm):
 		help_texts = {
 			'location': None,
 			'phonenumber': None,
-			'freetext': None,
+			'freetext':  None,
+		}
+		widgets = {
+			'location': forms.TextInput,
+			'phonenumber': forms.TextInput,
+			'freetext': forms.TextInput,
 		}
 		
 #FIXME: validation
