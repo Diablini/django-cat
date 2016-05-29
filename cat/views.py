@@ -8,7 +8,7 @@ from userinfo.models import *
 from django.shortcuts import *
 from django.core.exceptions import *
 from django.http import HttpResponse
-from django.contrib.auth import login as userlogin, authenticate
+from django.contrib.auth import login as userlogin, authenticate, logout as userlogout
 from django.contrib.auth.models import User
 
 # views
@@ -22,9 +22,10 @@ def homepage(request):
 	return HttpResponse(html)
 
 def login(request):
+	# user has posted login form - validate and login
 	if (request.method == 'POST'):
 		form = loginForm(request.POST)
-		if form.is_valid():
+		if form.is_valid:
 			username = request.POST['username']
 			password = request.POST['password']
 			user = authenticate(username=username, password=password) 
@@ -44,6 +45,7 @@ def login(request):
 		html = t.render(c)
 		return HttpResponse(html)
 		
+	# user hasnt posted form
 	else:
 		form = loginForm()
 		t = get_template('login.html')
@@ -56,6 +58,7 @@ def login(request):
 
 
 def registration(request):
+	# user has posted registration form - validate
 	if (request.method == 'POST'):
 		form = registrationForm(request.POST)
 		if form.is_valid:
@@ -64,10 +67,13 @@ def registration(request):
 			email = request.POST['email']
 			user = User.objects.create_user(username=username, \
 					password=password, email=email)
+			# create user profile and bind to django's User
+			profile = myUser()
 			return redirect('/')
 		else: 
 			error = 'Невалидни данни'
 			return redirect('/')
+	# user hasnt posted form - render empty form
 	else:
 		form = registrationForm()
 		t = get_template('registration.html')
@@ -77,7 +83,35 @@ def registration(request):
 		html = t.render(c)
 		return HttpResponse(html)
 
-
+def profile(request):
+	# assert user is logged in
+	if (not request.user.is_authenticated):
+		raise PermissionDenied
+	# form has been posted - validate and save
+	if (request.method == 'POST'):
+		form = profileForm(request.POST)
+		if form.is_valid:
+			user.profile = form
+			user.profile.save()
+			return redirect('/')
+		else:
+			error = 'Невалидни данни'
+			return redirect('/')
+	# form has not been posted - render current profile
+	else:
+		form = User.objects.get(request.user
+		t = get_template('profile.html')
+		c = RequestContext(request, {
+			'form': form,
+		})
+		html = t.render(c)
+		return HttpResponse(html)
+	
+def logout(request):
+	userlogout(request)
+	return redirect('/')
+	
+	
 	
 
 	

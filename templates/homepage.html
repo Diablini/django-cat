@@ -12,13 +12,16 @@
     
     {% if user.is_authenticated %}
         <h1> Здравей {{user.username}}  </h1>
+	<a href="logout"> Изход </a>
+	<br/>
+	<a href="profile"> Профил </a>
     {% else %}
         <h1> Здравей потребителю </h1>
-    {% endif %}
-        
         <a href="login"> Вход </a>
         <br/>
-	    <a href="registration"> Регистрация </a>
+	<a href="registration"> Регистрация </a>
+    {% endif %}
+        
         
         
     </div>
