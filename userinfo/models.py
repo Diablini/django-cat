@@ -27,9 +27,17 @@ class myUser(models.Model):
 		else: return
 
 	def __str__(self):
-		return self.userid.username + ' profile'
+		return self.userid.username + ' Profile'
 
-#FIXME: validation		
+#FIXME: validation
+
+	def clean_phonenumber(self):
+		number = self.cleaned_data['phonenumber']
+		# FIXME: fix pattern to match real phonenumbers (0885xxx..)
+		match = re.match(r'\d\d\d\d\d\d\d\d\d\d', number)
+		if match is None:
+			raise ValidationError('Грешен телефонен номер')
+		
 
 # FORMS
 
@@ -59,6 +67,20 @@ class registrationForm(forms.Form):
 	email = forms.EmailField(label='Мейл адрес', required=False)
 		
 #FIXME: validation
+
+	def clean(self):
+		cleaned_data = super(registrationForm, self).clean()
+		if (passowrd != passwordRepeat):
+			return ValidationError("Паролата не беше потвърдена успешно")
+		return cleaned_data
+
+	def clean_password(self):
+		if self.cleaned_data['password'].len() < 8:
+			raise ValidationError('Паролата трябва да е поне 8 символа')
+
+	def clean_passwordRepeat(self):
+		if self.cleaned_data['passwordRepeat'].len() < 8:
+			raise ValidationError('Паролата трябва да е поне 8 символа')
 
 class profileForm(ModelForm):
 	class Meta:

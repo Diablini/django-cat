@@ -1,0 +1,12 @@
+{% load staticfiles %}
+<link href="{% static 'css/sitewide.css' %} " type="text/css" rel="stylesheet">
+
+<div class="nav">
+    <a href=""> Начало </a>
+    <a href="search"> Търсене </a>
+    {% if user.is_authenticated %}
+    <a href="pet/create"> Обява </a>
+    {% else %}
+    
+    {% endif %}
+</div>

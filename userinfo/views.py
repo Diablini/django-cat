@@ -16,6 +16,10 @@ from django.contrib.auth.models import User
 
 
 def login(request):
+	# if user is already logged redirect to root
+	if (request.user.is_authenticated()):
+		redirect('')
+
 	# user has posted login form - validate and login
 	if (request.method == 'POST'):
 		form = loginForm(request.POST)
@@ -79,7 +83,7 @@ def registration(request):
 
 def profile(request):
 	# assert user is logged in
-	if (not request.user.is_authenticated):
+	if (not request.user.is_authenticated()):
 		raise PermissionDenied
 	# form has been posted - validate and save
 	if (request.method == 'POST'):
@@ -103,6 +107,8 @@ def profile(request):
 def logout(request):
 	userlogout(request)
 	return redirect('/')
+
+
 
 
 

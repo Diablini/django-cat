@@ -1,0 +1,19 @@
+{% extends base_layout.html %}
+
+
+{% block header %}
+
+    {% include 'header.html' %}
+
+{% endblock header %}
+
+
+{% block content %}
+
+    <form method="post" autocomplete="off">
+        
+        {{form}}
+        
+    </form>
+
+{% endblock content %}

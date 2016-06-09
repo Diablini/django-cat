@@ -1,6 +1,10 @@
+{% extends 'base_layout.html' %}
+
+{% load staticfiles %}
+
 <head>
     <title> {{page_title}}  </title>
-    <link rel="stylesheet" href="homepage.css" type="text/css">
+    <link rel="stylesheet" href="base_welcome.css">
     <meta name="author" content="Александър Бранев">
     <meta charset="utf-8">
 
@@ -8,23 +12,18 @@
 
 <body>
     
-    <div style="text-align:center;">
     
-    {% if user.is_authenticated %}
-        <h1> Здравей {{user.username}}  </h1>
-	<a href="logout"> Изход </a>
-	<br/>
-	<a href="profile"> Профил </a>
-    {% else %}
-        <h1> Здравей потребителю </h1>
-        <a href="login"> Вход </a>
-        <br/>
-	<a href="registration"> Регистрация </a>
-    {% endif %}
+    {% block header %}
         
-        
-        
-    </div>
+        {% include 'header.html' %}
+    
+    {% endblock header %}
+
+    {% block content %}
+        <div style="text-align:center">
+            
+        </div>
+    {% endblock content %}
     
     
     
