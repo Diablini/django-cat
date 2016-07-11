@@ -12,7 +12,7 @@ import re
 # MODELS
 
 class myUser(models.Model):
-	userid = models.OneToOneField(User, related_name='profile', on_delete=models.CASCADE )
+	userid = models.OneToOneField(User, related_name='profile', on_delete=models.CASCADE)
 	location = models.CharField(max_length = 64, blank=True, null=True)
 	phonenumber = models.CharField(max_length = 16, blank=True, null=True)
 	freetext = models.CharField(max_length = 512, blank=True, null = True)

@@ -1,4 +1,4 @@
-{% extends base_layout.html %}
+{% extends 'base_layout.html' %}
 
 
 {% block header %}
@@ -10,10 +10,10 @@
 
 {% block content %}
 
-    <form method="post" autocomplete="off">
-        
-        {{form}}
-        
+    <form action="" method="post" autocomplete="off">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Създаване"> 
     </form>
 
 {% endblock content %}

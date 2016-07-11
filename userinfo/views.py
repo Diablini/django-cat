@@ -23,7 +23,7 @@ def login(request):
 	# user has posted login form - validate and login
 	if (request.method == 'POST'):
 		form = loginForm(request.POST)
-		if form.is_valid:
+		if form.is_valid():
 			username = request.POST['username']
 			password = request.POST['password']
 			user = authenticate(username=username, password=password) 
@@ -59,7 +59,7 @@ def registration(request):
 	# user has posted registration form - validate
 	if (request.method == 'POST'):
 		form = registrationForm(request.POST)
-		if form.is_valid:
+		if form.is_valid():
 			username = request.POST['username']
 			password = request.POST['password']
 			email = request.POST['email']
@@ -88,7 +88,7 @@ def profile(request):
 	# form has been posted - validate and save
 	if (request.method == 'POST'):
 		form = profileForm(request.POST, instance=request.user.profile)
-		if form.is_valid:
+		if form.is_valid():
 			form.save()
 			return redirect('/')
 		else:

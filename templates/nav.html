@@ -2,10 +2,10 @@
 <link href="{% static 'css/sitewide.css' %} " type="text/css" rel="stylesheet">
 
 <div class="nav">
-    <a href=""> Начало </a>
-    <a href="search"> Търсене </a>
+    <a href="{% url 'home' %}"> Начало </a>
+    <a href="{% url 'home' %}"> Търсене </a>
     {% if user.is_authenticated %}
-    <a href="pet/create"> Обява </a>
+    <a href="{% url 'createpet' %}"> Обява </a>
     {% else %}
     
     {% endif %}
